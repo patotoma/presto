@@ -3,7 +3,9 @@ import { css } from 'styled-components';
 import { screenBreakpoints } from './constants.js';
 
 export const theme = {
-  fontColor: '#fff',
+  fontColor: '#333',
+  fontSize: '20px',
+  backgroundColor: '#fff',
 };
 
 // iterate through the sizes and create a media template
