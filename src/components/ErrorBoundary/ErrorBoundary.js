@@ -10,8 +10,8 @@ class ErrorBoundary extends React.PureComponent {
     this.setState({
       hasError: true,
     });
-    // You can also log the error to an error reporting service
-    // logErrorToMyService(error, info);
+    // TODO: connect some errorReporting
+    alert(`${error}: \n${info}`);
   }
 
   render() {
