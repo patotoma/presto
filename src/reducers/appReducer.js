@@ -4,7 +4,6 @@ import * as actionTypes from '../sagas/actionTypes.js';
 const initialState = {
   loadingStorage: true,
   token: null, // persisted by storage
-  user: null,
 };
 
 export default function appReducer(state = initialState, action) {

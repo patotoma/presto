@@ -6,14 +6,12 @@ import { promiseTypeSuffixes } from '../constants.js';
 
 // other reducers
 import appReducer from './appReducer.js';
-import loginReducer from './loginReducer.js';
-import homeReducer from './homeReducer.js';
+import userReducer from './userReducer.js';
 
 let rootReducer = combineReducers({
   loadingBar: loadingBarReducer,
   app: appReducer,
-  login: loginReducer,
-  home: homeReducer,
+  user: userReducer,
 });
 
 // reset app state on logout HOR
