@@ -16,8 +16,8 @@ import {
   promiseTypeSuffixes,
 } from './constants.js';
 import history from './services/history.js';
-import rootSaga from './sagas/rootSaga.js';
-import rootReducer from './reducers/rootReducer.js';
+import rootSaga from './sagas';
+import rootReducer from './reducers';
 import registerServiceWorker from './registerServiceWorker.js';
 
 import Theme from './Theme.js';

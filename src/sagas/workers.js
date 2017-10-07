@@ -1,7 +1,27 @@
-import { apiBase } from '../constants.js';
+import { call, put } from 'redux-saga/effects';
+
 import api, { setHeader, removeHeader } from '../services/api.js';
-import history from '../services/history.js';
-import * as selectors from './selectors.js';
+import * as actionTypes from './actionTypes.js';
+import * as apiCalls from './apiCalls.js';
+
+export function* login({ email, password }) {
+  try {
+    const { token, user } = yield call(apiCalls.login, email, password);
+    yield put({type: actionTypes.LOGIN.success, token, user});
+    return token;
+  } catch(error) {
+    yield put({type: actionTypes.LOGIN.failure, error});
+  }
+}
+
+export function* logout() {
+  try {
+    yield Promise.resolve();
+    yield put({type: actionTypes.LOGOUT.success});
+  } catch(error) {
+    yield put({type: actionTypes.LOGOUT.failure, error});
+  }
+}
 
 // // load repo unless it is cached
 // function* loadRepo(fullName, requiredFields) {

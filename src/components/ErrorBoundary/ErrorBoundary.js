@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { reportRenderError } from '../../services/errorReporting.js';
+
 class ErrorBoundary extends React.PureComponent {
   state = {
     hasError: false,
@@ -10,8 +12,7 @@ class ErrorBoundary extends React.PureComponent {
     this.setState({
       hasError: true,
     });
-    // TODO: connect some errorReporting
-    alert(`${error}: \n${info}`);
+    reportRenderError(error, info);
   }
 
   render() {

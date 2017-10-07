@@ -3,15 +3,20 @@ import { loadingBarReducer } from 'react-redux-loading-bar';
 
 import * as actionTypes from '../sagas/actionTypes.js';
 import { promiseTypeSuffixes } from '../constants.js';
+import { reportActionFailure } from '../services/errorReporting.js';
 
 // other reducers
 import appReducer from './appReducer.js';
 import userReducer from './userReducer.js';
+import postsReducer from './postsReducer.js';
+import commentsReducer from './commentsReducer.js';
 
 let rootReducer = combineReducers({
   loadingBar: loadingBarReducer,
   app: appReducer,
   user: userReducer,
+  posts: postsReducer,
+  comments: commentsReducer,
 });
 
 // reset app state on logout HOR
@@ -33,8 +38,7 @@ const errorReporting = (reducer, initialState) => (state, action) => {
     action.type !== actionTypes.LOGIN.failure &&
     action.type !== actionTypes.REGISTER.failure
   ) {
-    // TODO: connect some errorReporting
-    alert(action);
+    reportActionFailure(action);
   }
   return reducer(state, action);
 };
