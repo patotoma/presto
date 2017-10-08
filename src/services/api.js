@@ -3,14 +3,12 @@ function handleSuccessFetch(response, json, resolve, reject) {
   if (json && json.errorCode !== undefined) {
     // error
     reject({
-      error: {
-        ...json,
-        code: 1, // 200 but some logical error
-        errorCode: json.errorCode,
-        message: json.errorString,
-        status: response.status,
-        url: response.url,
-      },
+      ...json,
+      code: 1, // 200 but some logical error
+      errorCode: json.errorCode,
+      message: json.errorString,
+      status: response.status,
+      url: response.url,
     });
   } else {
     // SUCCESS
@@ -21,7 +19,6 @@ function handleSuccessFetch(response, json, resolve, reject) {
 // wrap fetch() and json() in single promise
 function handleFetch(fetchReq) {
   return new Promise((resolve, reject) => {
-
     fetchReq.then(response => {
       const contentType = response.headers.get('content-type');
       if (contentType && contentType.indexOf('application/json') !== -1) {
@@ -30,37 +27,27 @@ function handleFetch(fetchReq) {
             handleSuccessFetch(response, json, resolve, reject);
           });
         } else {
-          const error = {
+          reject({
             code: 0, // non 2xx response
             status: response.status,
             url: response.url,
             message: 'Network response was not ok!',
-          };
-          reject({
-            error: error,
           });
         }
       } else {
-        const error = {
+        reject({
           code: -1, // non json response
           status: response.status,
           url: response.url,
           message: 'Non-JSON response!',
-        };
-        reject({
-          error: error,
         });
       }
     }).catch(err => {
-      const error = {
+      reject({
         code: -2, // cannot even fetch
         message: `There has been a problem with your fetch operation: ${err.message}`,
-      };
-      reject({
-        error: error,
       });
     });
-
   });
 }
 
@@ -78,11 +65,7 @@ export function removeHeader(name) {
 }
 
 export default {
-
-  /*
-   *
-   * GET
-   */
+  // GET
   get: params => handleFetch(
     fetch(params.url, {
       method: 'GET',
@@ -93,10 +76,7 @@ export default {
     })
   ),
 
-  /*
-   *
-   * POST
-   */
+  // POST
   post: params => handleFetch(
     fetch(params.url, {
       method: 'POST',
@@ -104,28 +84,11 @@ export default {
         ...defaultHeaders,
         ...params.headers,
       },
-      body: params.useFormData ? params.data : JSON.stringify(params.data),
+      body: JSON.stringify(params.data),
     })
   ),
 
-  /*
-   *
-   * DELETE
-   */
-  delete: params => handleFetch(
-    fetch(params.url, {
-      method: 'DELETE',
-      headers: {
-        ...defaultHeaders,
-        ...params.headers,
-      },
-    })
-  ),
-
-  /*
-   *
-   * PUT
-   */
+  // PUT
   put: params => handleFetch(
     fetch(params.url, {
       method: 'PUT',
@@ -137,10 +100,7 @@ export default {
     })
   ),
 
-  /*
-   *
-   * PATCH
-   */
+  // PATCH
   patch: params => handleFetch(
     fetch(params.url, {
       method: 'PATCH',
@@ -149,6 +109,17 @@ export default {
         ...params.headers,
       },
       body: JSON.stringify(params.data),
+    })
+  ),
+
+  // DELETE
+  delete: params => handleFetch(
+    fetch(params.url, {
+      method: 'DELETE',
+      headers: {
+        ...defaultHeaders,
+        ...params.headers,
+      },
     })
   ),
 };

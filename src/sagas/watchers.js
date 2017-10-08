@@ -10,3 +10,11 @@ export function* watchLogin() {
 export function* watchLogout() {
   yield takeEvery(actionTypes.LOGOUT.request, workers.logout);
 }
+
+export function* watchGetPosts() {
+  yield takeEvery(actionTypes.GET_POSTS.request, workers.getPosts);
+}
+
+export function* watchGetComments() {
+  yield takeEvery(actionTypes.GET_COMMENTS.request, workers.getComments);
+}

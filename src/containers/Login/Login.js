@@ -7,9 +7,7 @@ import { Redirect } from 'react-router-dom';
 import * as actionTypes from '../../sagas/actionTypes.js';
 
 class Login extends PureComponent {
-
   static propTypes = {
-    login: PropTypes.object.isRequired,
     appToken: PropTypes.string,
   };
 
@@ -86,6 +84,5 @@ const Input = styled.input.attrs({
 `;
 
 export default connect(state => ({
-  login: state.login,
   appToken: state.app.token,
 }))(Login);

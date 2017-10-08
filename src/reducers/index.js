@@ -34,11 +34,16 @@ rootReducer = resetOnLogout(rootReducer, {});
 // catch all _FAILUREs HOR
 const errorReporting = (reducer, initialState) => (state, action) => {
   if (
-    action.type.endsWith(`_${promiseTypeSuffixes[2]}`) &&
-    action.type !== actionTypes.LOGIN.failure &&
-    action.type !== actionTypes.REGISTER.failure
+    action.type.endsWith(`_${promiseTypeSuffixes[2]}`)
   ) {
-    reportActionFailure(action);
+    if (action.type === actionTypes.LOGIN.failure ||
+    action.type === actionTypes.REGISTER.failure) {
+      if (action.error.status !== 400 && action.error.status !== 401) {
+        reportActionFailure(action);
+      }
+    } else {
+      reportActionFailure(action);
+    }
   }
   return reducer(state, action);
 };
