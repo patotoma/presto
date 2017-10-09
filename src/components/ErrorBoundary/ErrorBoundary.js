@@ -2,7 +2,7 @@ import React from 'react';
 
 import { reportRenderError } from '../../services/errorReporting.js';
 
-class ErrorBoundary extends React.PureComponent {
+export class ErrorBoundary extends React.PureComponent {
   state = {
     hasError: false,
   };

@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NoMatch from './NoMatch.js';
+
+import { Register } from './Register.js';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<NoMatch />, div);
+  ReactDOM.render(<Register />, div);
 });

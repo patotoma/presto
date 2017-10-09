@@ -18,7 +18,7 @@ import { spin } from '../../utils/style.js';
 import { media } from '../../Theme.js';
 import logo from '../../assets/imgs/logo.svg';
 
-class Home extends React.PureComponent {
+export class Home extends React.PureComponent {
   static propTypes = {
     posts: PropTypes.array.isRequired,
     comments: PropTypes.array.isRequired,

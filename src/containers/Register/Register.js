@@ -19,7 +19,7 @@ import {
 
 import * as actionTypes from '../../sagas/actionTypes.js';
 
-class Register extends React.PureComponent {
+export class Register extends React.PureComponent {
   static propTypes = {
     user: PropTypes.object,
   };

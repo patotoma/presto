@@ -11,7 +11,7 @@ import {
   Image,
 } from 'react-bootstrap';
 
-class Landing extends React.PureComponent {
+export class Landing extends React.PureComponent {
   static propTypes = {
     history: PropTypes.object.isRequired,
   };

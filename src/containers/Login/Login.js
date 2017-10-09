@@ -18,7 +18,7 @@ import {
 
 import * as actionTypes from '../../sagas/actionTypes.js';
 
-class Login extends React.PureComponent {
+export class Login extends React.PureComponent {
   static propTypes = {
     user: PropTypes.object,
   };

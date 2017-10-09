@@ -8,7 +8,7 @@ import {
   MenuItem,
 } from 'react-bootstrap';
 
-class NavBar extends React.PureComponent {
+export class NavBar extends React.PureComponent {
   static propTypes = {
     user: PropTypes.object,
     handleSelect: PropTypes.func.isRequired,

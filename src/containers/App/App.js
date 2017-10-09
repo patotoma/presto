@@ -17,7 +17,7 @@ import Login from '../Login/Login.js';
 import Register from '../Register/Register.js';
 import Home from '../Home/Home.js';
 
-class App extends React.PureComponent {
+export class App extends React.PureComponent {
   static propTypes = {
     app: PropTypes.object.isRequired,
     user: PropTypes.object,
