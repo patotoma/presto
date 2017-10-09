@@ -23,6 +23,10 @@ import registerServiceWorker from './registerServiceWorker.js';
 import Theme from './Theme.js';
 import App from './containers/App/App.js';
 
+// bootstrap css needs to be included for react-bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap-theme.min.css';
+
 const sagaMiddleware = createSagaMiddleware();
 
 let middlewares = [
@@ -62,13 +66,10 @@ persistStore(store, {
   transforms: [
     // if you want to store only a subset of your state
     createFilter(
-      'app', ['token'],
+      'app', ['_token'],
     ),
   ],
   whitelist: ['app'],
-}, (err, incomingState) => {
-  // after rehydration has completed
-  console.info('rehydration complete');
 });
 
 // If things get out of wack, just purge the storage

@@ -3,7 +3,8 @@ import * as actionTypes from '../sagas/actionTypes.js';
 
 const initialState = {
   loadingStorage: true,
-  token: null, // persisted by storage
+  _token: null, // persisted by storage
+  token: null,
 };
 
 export default function appReducer(state = initialState, action) {
@@ -17,6 +18,14 @@ export default function appReducer(state = initialState, action) {
 
   case actionTypes.LOGIN.success: {
     return update(state, {
+      _token: { $set: action.remember ? action.token : null },
+      token: { $set: action.token },
+    });
+  }
+
+  case actionTypes.REGISTER.success: {
+    return update(state, {
+      _token: { $set: action.remember ? action.token : null },
       token: { $set: action.token },
     });
   }

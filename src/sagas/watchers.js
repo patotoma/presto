@@ -7,6 +7,10 @@ export function* watchLogin() {
   yield takeEvery(actionTypes.LOGIN.request, workers.login);
 }
 
+export function* watchRegister() {
+  yield takeEvery(actionTypes.REGISTER.request, workers.register);
+}
+
 export function* watchLogout() {
   yield takeEvery(actionTypes.LOGOUT.request, workers.logout);
 }

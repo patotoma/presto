@@ -10,6 +10,14 @@ export default function userReducer(state = initialState, action) {
     return update(state, { $set: action.user });
   }
 
+  case actionTypes.REGISTER.success: {
+    return update(state, { $set: action.user });
+  }
+
+  case actionTypes.GET_USER.success: {
+    return update(state, { $set: action.user });
+  }
+
   default: return state;
   }
 }

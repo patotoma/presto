@@ -1,7 +1,7 @@
 import { isProd, hasRaven } from '../constants.js';
 
 export function reportActionFailure(action) {
-  if (/*isProd &&*/ hasRaven) {
+  if (isProd && hasRaven) {
     window.Raven.captureException(action.error, {
       extra: action,
     });
@@ -10,7 +10,7 @@ export function reportActionFailure(action) {
 }
 
 export function reportRenderError(error, info) {
-  if (/*isProd &&*/ hasRaven) {
+  if (isProd && hasRaven) {
     window.Raven.captureException(error, {
       extra: info,
     });

@@ -10,5 +10,6 @@ export const STORAGE_LOADED = 'STORAGE_LOADED';
 export const LOGIN = createActionTypes('LOGIN');
 export const REGISTER = createActionTypes('REGISTER');
 export const LOGOUT = createActionTypes('LOGOUT');
+export const GET_USER = createActionTypes('GET_USER');
 export const GET_POSTS = createActionTypes('GET_POSTS');
 export const GET_COMMENTS = createActionTypes('GET_COMMENTS');

@@ -1,86 +1,114 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import {
+  Grid,
+  Row,
+  Col,
+  PageHeader,
+  ButtonGroup,
+  Button,
+} from 'react-bootstrap';
 
 import * as actionTypes from '../../sagas/actionTypes.js';
+
+import { capitalize } from '../../utils/string.js';
+import { spin } from '../../utils/style.js';
+import { media } from '../../Theme.js';
 import logo from '../../assets/imgs/logo.svg';
 
-// keyframes
-// import styled, { keyframes } from 'styled-components';
-//
-// const fadeIn = keyframes`
-//   0% {
-//     opacity: 0;
-//   }
-//   100% {
-//     opacity: 1;
-//   }
-// `;
-//
-// const FadeInButton = styled.button`
-//   animation: 1s ${fadeIn} ease-out;
-// `;
-
-class Home extends PureComponent {
+class Home extends React.PureComponent {
   static propTypes = {
-    home: PropTypes.object.isRequired,
+    posts: PropTypes.array.isRequired,
+    comments: PropTypes.array.isRequired,
   };
 
   state = {
-    city: null,
+    value: null,
   };
 
-  button = null;
+  _input = null;
 
-  selectCity = e => {
+  componentWillMount() {
+    this.props.dispatch({type: actionTypes.GET_POSTS.request});
+    this.props.dispatch({type: actionTypes.GET_COMMENTS.request});
+  }
+
+  select = e => {
     const newValue = e.currentTarget.value;
     this.setState(state => {
-      if (state.city === newValue) {
+      if (state.value === newValue) {
         return null; // react16 way to prevent state update
       }
+      this._input.value = capitalize(newValue); // set input value
+      // update state
       return {
-        city: newValue,
+        value: newValue,
       };
     });
   }
 
-  logout = e => {
-    e.preventDefault();
-
-    this.props.dispatch({
-      type: actionTypes.LOGOUT.request,
-    });
-  }
-
   render() {
-    const {
-      home,
-      match,
-    } = this.props;
-
     return (
-      <div>
-        <div>
-          <a href="" onClick={this.logout}>Log out</a>
-        </div>
-
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-
-        <button ref={c => { this.button = c; }}>Toggle</button>
-        <button type="button" value="paris" onClick={this.selectCity}>Paris</button>
-        <button type="button" value="vienna" onClick={this.selectCity}>Vienna</button>
-      </div>
+      <Grid>
+        <Row>
+          <PageHeader>Welcome inside!</PageHeader>
+        </Row>
+        <Row>
+          <StyledBox>
+            <p>this box is very responsive</p>
+          </StyledBox>
+        </Row>
+        <Row>
+          <Col md={6}>
+            <StyledImage src={logo} alt="logo"/>
+          </Col>
+          <Col md={6}>
+            <input type="text" disabled ref={c => { this._input = c; }}/>
+            <p>Clicking any button below will set this input</p>
+            <div>
+              <ButtonGroup>
+                <Button type="button" value="left" onClick={this.select}>Left</Button>
+                <Button type="button" value="middle" onClick={this.select}>Middle</Button>
+                <Button type="button" value="right" onClick={this.select}>Right</Button>
+              </ButtonGroup>
+            </div>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
 
+const StyledImage = styled.img`
+  width: 250px;
+  display: block;
+  margin: 0 auto;
+  animation: ${spin} infinite 5s linear;
+`;
+
+const StyledBox = styled.div`
+  background-color: #a7a7a7;
+  color: white;
+  padding: 0;
+  margin: 20px 0 30px;
+  border-radius: 5px;
+  ${media.lg`
+    padding: 40px;
+  `}
+  ${media.md`
+    padding: 20px;
+  `}
+  ${media.sm`
+    padding: 10px;
+  `}
+  ${media.xs`
+    padding: 0;
+  `}
+`;
+
 export default connect(state => ({
-  home: state.home,
+  posts: state.posts,
+  comments: state.comments,
 }))(Home);
