@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css, keyframes } from 'styled-components';
 
 export const toEm = px => px / 16;
 
@@ -30,3 +30,21 @@ export const complexMixin = css`
 //   /* This is an example of a nested interpolation */
 //   ${props => props.complex ? complexMixin : 'color: blue;'}
 // `;
+
+export const spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;

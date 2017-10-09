@@ -1,6 +1,8 @@
 import React from 'react';
 
-class ErrorBoundary extends React.PureComponent {
+import { reportRenderError } from '../../services/errorReporting.js';
+
+export class ErrorBoundary extends React.PureComponent {
   state = {
     hasError: false,
   };
@@ -10,8 +12,7 @@ class ErrorBoundary extends React.PureComponent {
     this.setState({
       hasError: true,
     });
-    // You can also log the error to an error reporting service
-    // logErrorToMyService(error, info);
+    reportRenderError(error, info);
   }
 
   render() {
