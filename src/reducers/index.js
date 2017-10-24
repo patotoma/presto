@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { loadingBarReducer } from 'react-redux-loading-bar';
+import { reducer as formReducer } from 'redux-form';
 
 import * as actionTypes from '../sagas/actionTypes.js';
 import { promiseTypeSuffixes } from '../constants.js';
@@ -17,6 +18,7 @@ let rootReducer = combineReducers({
   user: userReducer,
   posts: postsReducer,
   comments: commentsReducer,
+  form: formReducer, // redux-form
 });
 
 // reset app state on logout HOR
