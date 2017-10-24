@@ -10,22 +10,17 @@ import { persistStore } from 'redux-persist';
 import createFilter from 'redux-persist-transform-filter';
 import { loadingBarMiddleware } from 'react-redux-loading-bar';
 
-import {
-  isDev,
-  storageKeyPrefix,
-  promiseTypeSuffixes,
-} from './constants.js';
+import 'semantic-ui-css/semantic.min.css';
+
+import registerServiceWorker from './registerServiceWorker.js';
+import { isDev, storageKeyPrefix, promiseTypeSuffixes } from './constants.js';
 import history from './services/history.js';
 import rootSaga from './sagas';
 import rootReducer from './reducers';
-import registerServiceWorker from './registerServiceWorker.js';
 
-import Theme from './Theme.js';
-import App from './containers/App/App.js';
+import App from './pages/App/App.js';
 
-// bootstrap css needs to be included for react-bootstrap
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/css/bootstrap-theme.min.css';
+import './index.css';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -81,12 +76,10 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
   <Provider store={store}>
     {/* we are not using the BrowserRouter directly */}
-    {/* but plain Router with passing our custom History */}
-    {/* this is to be able to manage history outside of components (e.g. action creators) */}
+    {/* but plain Router object with custom History */}
+    {/* now we are able to manage history even outside of components (e.g. in action creators) */}
     <Router history={history}>
-      <Theme>
-        <Route path="/" component={App}/>
-      </Theme>
+      <Route path="/" component={App}/>
     </Router>
   </Provider>,
   document.getElementById('root')

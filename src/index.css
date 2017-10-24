@@ -1,0 +1,21 @@
+/* custom fonts */
+/*@font-face {
+  font-family: 'Operator Mono';
+  src: url('./assets/fonts/Operator-Mono.ttf');
+}*/
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#root,
+#root > div {
+  height: 100%;
+}
