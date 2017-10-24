@@ -26,11 +26,9 @@ export function getUser() {
 }
 
 export function getPosts() {
-  console.log('inside worker getPosts');
   return api.get({url: `${apiBase}/posts`});
 }
 
 export function getComments() {
-  console.log('inside worker getComments');
   return api.get({url: `${apiBase}/comments`});
 }
