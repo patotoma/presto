@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
   Segment,
@@ -10,7 +11,15 @@ import {
 } from 'semantic-ui-react';
 
 export default class Hero extends React.PureComponent {
+  static propTypes = {
+    handleClick: PropTypes.func.isRequired,
+  }
+
   render() {
+    const {
+      handleClick,
+    } = this.props;
+
     return (
       <StyledSegment inverted textAlign='center' vertical>
         <Container text>
@@ -24,7 +33,7 @@ export default class Hero extends React.PureComponent {
             </Grid.Row>
 
             <Grid.Row>
-              <Button primary size='huge'>
+              <Button type="button" primary size='huge' onClick={handleClick}>
                 <Icon name='down arrow'/>
                 View details
               </Button>
