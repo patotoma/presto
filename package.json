@@ -23,6 +23,7 @@
     "redux-persist": "^4.10.1",
     "redux-persist-transform-filter": "^0.0.15",
     "redux-saga": "^0.15.6",
+    "scroll-to-element": "^2.0.0",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.75.1",
     "styled-components": "^2.2.1",
