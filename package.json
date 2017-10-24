@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "history": "^4.7.2",
     "immutability-helper": "^2.4.0",
@@ -11,7 +10,6 @@
     "moment": "^2.18.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
-    "react-bootstrap": "^0.31.3",
     "react-dom": "^16.0.0",
     "react-icons": "^2.2.5",
     "react-images": "^0.5.7",
@@ -25,6 +23,8 @@
     "redux-persist": "^4.10.1",
     "redux-persist-transform-filter": "^0.0.15",
     "redux-saga": "^0.15.6",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.75.1",
     "styled-components": "^2.2.1",
     "super-array": "^1.1.2"
   },

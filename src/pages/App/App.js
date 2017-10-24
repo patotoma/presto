@@ -1,15 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import LoadingBar from 'react-redux-loading-bar';
+import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
-
-import * as actionTypes from '../../sagas/actionTypes.js';
+import LoadingBar from 'react-redux-loading-bar';
 
 import NoMatch from '../../components/NoMatch/NoMatch.js';
 import ProtectedRoute from '../../components/ProtectedRoute/ProtectedRoute.js';
-import NavBar from '../../components/NavBar/NavBar.js';
+import Header from '../../components/Header/Header.js';
 
 // pages
 import Landing from '../Landing/Landing.js';
@@ -21,22 +19,7 @@ export class App extends React.PureComponent {
   static propTypes = {
     app: PropTypes.object.isRequired,
     user: PropTypes.object,
-    history: PropTypes.object.isRequired,
   };
-
-  handleNavBarSelect = eventKey => {
-    switch (eventKey) {
-    case 'home':
-      this.props.history.push('/home');
-      break;
-    case 'logout':
-      this.props.dispatch({
-        type: actionTypes.LOGOUT.request,
-      });
-      break;
-    default:
-    }
-  }
 
   render() {
     const {
@@ -55,31 +38,36 @@ export class App extends React.PureComponent {
     return (
       <div>
         <StyledLoadingBar/>
-        <NavBar
-          user={user}
-          handleSelect={this.handleNavBarSelect}
-        />
+        <Header/>
 
-        {/* switch renders the first child route that matches */}
-        <Switch>
-          <Route exact path="/" component={Landing}/>
-          <Route path="/login" component={Login}/>
-          <Route path="/register" component={Register}/>
-          <ProtectedRoute path="/home" component={Home}/>
+        {/* content */}
+        <StyledContent>
+          {/* switch renders the first child route that matches */}
+          <Switch>
+            <Route exact path="/" component={Landing}/>
+            <Route path="/login" component={Login}/>
+            <Route path="/register" component={Register}/>
+            <ProtectedRoute path="/home" component={Home}/>
 
-          {/* route with no path always matches */}
-          <Route component={NoMatch}/>
-        </Switch>
+            {/* route with no path always matches */}
+            <Route component={NoMatch}/>
+          </Switch>
+        </StyledContent>
       </div>
     );
   }
 }
 
 const StyledLoadingBar = styled(LoadingBar)`
-  background-color: #28ddff;
+  background-color: #ffdd57;
   height: 2px;
   position: fixed;
   z-index: 10000;
+`;
+
+const StyledContent = styled.div`
+  padding-top: 50px; ${'' /* fixed header offset */}
+  height: 100%;
 `;
 
 export default connect(state => ({
