@@ -10,7 +10,7 @@ import {
   Dropdown,
 } from 'semantic-ui-react';
 
-import * as actionTypes from '../../sagas/actionTypes.js';
+import * as actionTypes from '../../../sagas/actionTypes.js';
 
 export class Header extends React.PureComponent {
   static propTypes = {

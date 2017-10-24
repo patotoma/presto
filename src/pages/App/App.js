@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
-import LoadingBar from 'react-redux-loading-bar';
 
-import NoMatch from '../../components/NoMatch/NoMatch.js';
 import ProtectedRoute from '../../components/ProtectedRoute/ProtectedRoute.js';
-import Header from '../../components/Header/Header.js';
-
-// pages
 import Landing from '../Landing/Landing.js';
 import Login from '../Login/Login.js';
 import Register from '../Register/Register.js';
 import Home from '../Home/Home.js';
+
+import Header from './Header/Header.js';
+import NoMatch from './NoMatch/NoMatch.js';
+import LoadingBar from './LoadingBar/LoadingBar.js';
 
 export class App extends React.PureComponent {
   static propTypes = {
@@ -37,7 +36,7 @@ export class App extends React.PureComponent {
 
     return (
       <div>
-        <StyledLoadingBar/>
+        <LoadingBar/>
         <Header/>
 
         {/* content */}
@@ -57,13 +56,6 @@ export class App extends React.PureComponent {
     );
   }
 }
-
-const StyledLoadingBar = styled(LoadingBar)`
-  background-color: #ffdd57;
-  height: 2px;
-  position: fixed;
-  z-index: 10000;
-`;
 
 const StyledContent = styled.div`
   padding-top: 50px; ${'' /* fixed header offset */}

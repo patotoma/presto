@@ -9,16 +9,24 @@ import {
   List,
   Segment,
 } from 'semantic-ui-react';
+import scrollToElement from 'scroll-to-element';
 
-import Hero from '../../components/Hero/Hero.js';
+import Hero from './Hero/Hero.js';
+
 
 export class Landing extends React.PureComponent {
+  scrollToContent = () => {
+    scrollToElement('#scroll-handler', {
+      offset: -50, // header
+    });
+  }
+
   render() {
     return (
       <div>
-        <Hero/>
+        <Hero handleClick={this.scrollToContent}/>
 
-        <Segment style={{ padding: '8em 0em' }} vertical>
+        <Segment style={{ padding: '8em 0em' }} vertical id="scroll-handler">
           <Grid container stackable verticalAlign='middle'>
             <Grid.Row>
               <Grid.Column width={8}>
