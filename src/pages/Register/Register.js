@@ -25,7 +25,6 @@ export class Register extends React.PureComponent {
     email: '',
     password: '',
     repeatPassword: '',
-    remember: false,
     errors: [],
   };
 
@@ -38,7 +37,6 @@ export class Register extends React.PureComponent {
       email,
       password,
       repeatPassword,
-      remember,
     } = this.state;
 
     const errors = [];
@@ -56,7 +54,6 @@ export class Register extends React.PureComponent {
         surname: surname,
         email: email,
         password: password,
-        remember: remember,
       });
     }
   }

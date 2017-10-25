@@ -1,21 +1,21 @@
-import { take, put, fork, all, select, call } from 'redux-saga/effects';
+import { take, put, fork, all, call } from 'redux-saga/effects';
 import { REHYDRATE } from 'redux-persist/constants';
 
 import * as actionTypes from './actionTypes.js';
 import * as watchers from './watchers.js';
 import * as workers from './workers.js';
-import * as selectors from './selectors.js';
 
 export default function* rootSaga() {
-  yield take(REHYDRATE);
-  yield put({type: actionTypes.STORAGE_LOADED});
+  const [authStateChanged] = yield all([
+    take(actionTypes.AUTH_STATE_CHANGED.request), // first auth state change
+    take(REHYDRATE), // localStorage rehydrate
+  ]);
+  yield call(workers.authStateChanged, authStateChanged);
 
-  const token = yield select(selectors.getToken);
-  if (token !== null) {
-    yield call(workers.getUser);
-  }
+  yield put({type: actionTypes.APP_LOADED});
 
   yield all([
+    fork(watchers.watchAuthStateChanged),
     fork(watchers.watchLogin),
     fork(watchers.watchRegister),
     fork(watchers.watchLogout),

@@ -6,7 +6,8 @@ const createActionTypes = base => promiseTypeSuffixes
     return acc;
   }, {});
 
-export const STORAGE_LOADED = 'STORAGE_LOADED';
+export const APP_LOADED = 'APP_LOADED';
+export const AUTH_STATE_CHANGED = createActionTypes('AUTH_STATE_CHANGED');
 export const LOGIN = createActionTypes('LOGIN');
 export const REGISTER = createActionTypes('REGISTER');
 export const LOGOUT = createActionTypes('LOGOUT');

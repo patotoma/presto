@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
+import * as firebase from 'firebase';
 import styled from 'styled-components';
+
+import * as actionTypes from '../../sagas/actionTypes.js';
 
 import ProtectedRoute from '../../components/ProtectedRoute/ProtectedRoute.js';
 import Landing from '../Landing/Landing.js';
@@ -17,21 +20,26 @@ import LoadingBar from './LoadingBar/LoadingBar.js';
 export class App extends React.PureComponent {
   static propTypes = {
     app: PropTypes.object.isRequired,
-    user: PropTypes.object,
   };
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      // user is either object or null
+      this.props.dispatch({
+        type: actionTypes.AUTH_STATE_CHANGED.request,
+        user: user,
+      });
+    });
+  }
 
   render() {
     const {
       app,
-      user,
     } = this.props;
 
-    if (app.loadingStorage) {
-      return <div>Loading storage...</div>;
-    }
-
-    if (app.token && !user) {
-      return <div>Loading user...</div>;
+    if (app.loading) {
+      // TODO: we can show some kind of loader here
+      return null;
     }
 
     return (
@@ -64,5 +72,4 @@ const StyledContent = styled.div`
 
 export default connect(state => ({
   app: state.app,
-  user: state.user,
 }))(App);
