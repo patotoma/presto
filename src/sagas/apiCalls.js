@@ -1,28 +1,18 @@
+import * as firebase from 'firebase';
+
 import api from '../services/api.js';
 import { apiBase } from '../constants.js';
 
 export function login(email, password) {
-  return Promise.resolve({
-    token: 'abc',
-    user: { id: 'abc', name: 'John Doe', email: email },
-  });
+  return firebase.auth().signInWithEmailAndPassword(email, password);
 }
 
 export function register(firstName, surname, email, password) {
-  return Promise.resolve({
-    token: 'abc',
-    user: { id: 'abc', name: `${firstName} ${surname}`, email: email },
-  });
+  return firebase.auth().createUserWithEmailAndPassword(email, password);
 }
 
 export function logout() {
-  return Promise.resolve();
-}
-
-export function getUser() {
-  return Promise.resolve({
-    user: { id: 'abc', name: 'John Doe', email: 'john@doe.com' },
-  });
+  return firebase.auth().signOut();
 }
 
 export function getPosts() {

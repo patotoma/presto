@@ -22,19 +22,17 @@ export class Login extends React.PureComponent {
   state = {
     email: '',
     password: '',
-    remember: false,
     errors: [],
   };
 
   login = e => {
     e.preventDefault();
 
-    const { email, password, remember } = this.state;
+    const { email, password } = this.state;
     this.props.dispatch({
       type: actionTypes.LOGIN.request,
       email: email,
       password: password,
-      remember: remember,
     });
   }
 

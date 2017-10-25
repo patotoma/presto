@@ -41,7 +41,7 @@ export class Header extends React.PureComponent {
 
           {user ?
             <Menu.Item position='right'>
-              <StyledDropdown item text={user.name}>
+              <StyledDropdown item text={user.email}>
                 <Dropdown.Menu>
                   <Dropdown.Item
                     icon='home'

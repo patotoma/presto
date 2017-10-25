@@ -9,6 +9,7 @@ import createSagaMiddleware from 'redux-saga';
 import { persistStore } from 'redux-persist';
 import createFilter from 'redux-persist-transform-filter';
 import { loadingBarMiddleware } from 'react-redux-loading-bar';
+import * as firebase from 'firebase';
 
 import 'semantic-ui-css/semantic.min.css';
 
@@ -61,10 +62,14 @@ persistStore(store, {
   transforms: [
     // if you want to store only a subset of your state
     createFilter(
-      'app', ['_token'],
+      // 'app', ['token'],
+      'settings',
     ),
   ],
-  whitelist: ['app'],
+  whitelist: [
+    // 'app',
+    'settings',
+  ],
 });
 
 // If things get out of wack, just purge the storage
@@ -72,6 +77,17 @@ persistStore(store, {
 
 // run rootSaga
 sagaMiddleware.run(rootSaga);
+
+// firebase
+const config = {
+  apiKey: 'AIzaSyBz9mM5bbL9T-e8ITnefsYhm_s1HB57OwU',
+  authDomain: 'presto-2de99.firebaseapp.com',
+  databaseURL: 'https://presto-2de99.firebaseio.com',
+  projectId: 'presto-2de99',
+  storageBucket: '',
+  messagingSenderId: '221450785321',
+};
+firebase.initializeApp(config);
 
 ReactDOM.render(
   <Provider store={store}>
